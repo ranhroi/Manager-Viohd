@@ -104,7 +104,7 @@ var groupDiscover = getID("discover"),
     groupLanguages = getID('group-languages'),
     groupYears = getID('group-years'),
     groupInput = getID('group-input'),
-    groupTyOp = getEls('#group-types option');
+    groupTyOp = getAll('#group-types option');
 
 groupDiscover.addEventListener('change', function() {
     if (this.value === 'country') {
