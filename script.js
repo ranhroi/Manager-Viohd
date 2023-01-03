@@ -2,7 +2,7 @@ function getID(a) {
     return document.getElementById(a)
 }
 
-function getEls(a) {
+function getAll(a) {
     return document.querySelectorAll(a)
 };
 var objTMDb = {
