@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
         totals = getID('totals');
         creatLink = getID('creatLink');
         searchId = getAll('.searchId');
-        result_display = getID("result_display");
+        resultDisplay = getID("result-display");
     }
     jQuery(document).on('click', '#push', function() {
         Ready();
@@ -23,7 +23,7 @@ jQuery(document).ready(function() {
             });
             databaseURL.child(imdB).on('value', function(snapshot) {
                 if (snapshot.val() != null) {
-                    result_display.innerHTML = `ID : ${imdB} | LANGUAGE : ${snapshot.val().language} | SOURCE : ${snapshot.val().source}`;
+                    resultDisplay.innerHTML = `ID : ${imdB} | LANGUAGE : ${snapshot.val().language} | SOURCE : ${snapshot.val().source}`;
                     searchId.href = "http://viohd.blogspot.com/search?q=" + imdB;
                     toast({
                         msg: 'Success! : Add thành công',
@@ -106,7 +106,7 @@ jQuery(document).ready(function() {
                 language: language
             })
             databaseURL.child(imdB).once('value', function(snapshot) {
-                result_display.innerHTML = `ID : ${imdB} | LANGUAGE : ${snapshot.val().language} | SOURCE : ${snapshot.val().source}`;
+                resultDisplay.innerHTML = `ID : ${imdB} | LANGUAGE : ${snapshot.val().language} | SOURCE : ${snapshot.val().source}`;
                 toast({
                     msg: 'Success: update thành công',
                     type: 'success',
@@ -157,7 +157,7 @@ jQuery(document).ready(function() {
         for (i = 1; i < 51; i++) {
             a += i + ';|'
         }
-        result_display.innerHTML = '[id]' + a + '[/id]';
+        resultDisplay.innerHTML = '[id]' + a + '[/id]';
         toast({
             msg: 'Add success: <strong>[id]' + a + '[/id]</strong>',
             type: 'success',
