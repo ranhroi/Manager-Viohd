@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager TMDb</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+    <script src='https://cdn.firebase.com/v0/firebase.js' type='text/javascript'></script>
+    <script src="script.js"></script>
+    <style>
+        .modal-body {
+            color: var(--color)
+        }
+        
+        button.post-overplay.isRequest {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class='light'>
+    <div class='loadings'></div>
+    <div class='grid' data-style='false'>
+        <div class='row'>
+            <!--Header-->
+            <div class='col l-12 m-12 s-12'>
+                <header class='header'>
+                    <button class='header-bars btn' data-menu='false'>
+                     <svg class='icon-menu-bars' style='width: 100%; height: 100%;' viewBox='0 0 24 24'>
+                        <path d='M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z'></path>
+                     </svg>
+                     <svg class='icon-menu-times' style='width: 100%; height: 100%;' viewBox='0 0 24 24'>
+                        <path d='M12.7,12l6.6,6.6l-0.7,0.7L12,12.7l-6.6,6.6l-0.7-0.7l6.6-6.6L4.6,5.4l0.7-0.7l6.6,6.6l6.6-6.6l0.7,0.7L12.7,12z'></path>
+                     </svg>
+                  </button>
+                    <div class='header-logo'>
+                        <a class='header-link' href='index.html' title='VIOHD : Classic Movies Collection'>
+                            <h1 class='header-text'>Viohd</h1>
+                        </a>
+                    </div>
+                    <nav class='header-navigation'>
+                        <ul class='navigation-list'>
+                            <li class='navigation-item attr btn' id='scheme' title='Roomy/Details Posts'>
+                                <svg class='icon-details' focusable='false' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'>
+                              <g>
+                                 <path d='M20,9H9V7h11V9z M20,11H9v2h11V11z M20,15H9v2h11V15z M7,7H4v2h3V7z M7,11H4v2h3V11z M7,15H4v2h3V15z'></path>
+                              </g>
+                           </svg>
+                                <svg class='icon-roomy' viewBox='0 0 24 24'>
+                              <path d='M8,11H2V4h6V11z M3,10h4V5H3V10z M8,20H2v-7h6V20z M3,19h4v-5H3V19z M15,11H9V4h6V11z M10,10h4V5h-4V10z M15,20H9v-7h6V20z M10,19h4v-5h-4V19z M22,11h-6V4h6V11z M17,10h4V5h-4V10z M22,20h-6v-7h6V20z M17,19h4v-5h-4V19z'></path>
+                           </svg>
+                            </li>
+                            <li class='navigation-item requested btn' title='No movies requested'>
+                                <a href='createMovie.html'>
+                                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" class="icon-menu-left"><g>
+                                        <path d="M14,13h-3v3H9v-3H6v-2h3V8h2v3h3V13z M17,6H3v12h14v-6.39l4,1.83V8.56l-4,1.83V6 M18,5v3.83L22,7v8l-4-1.83V19H2V5H18L18,5 z" class="style-scope yt-icon"></path></g>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+        </div>
+        <!--sidebar-->
+        <div class='sidebar' data-menu='false'>
+            <nav class='sidebar-menu'>
+                <ul class='menu'>
+                    <li class='menu-parent'>
+                        <a class='menu-link'>
+                            <svg class='icon-menu-left' focusable='false' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'>
+                           <g>
+                              <path d='M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,8c-2.21,0-4,1.79-4,4s1.79,4,4,4s4-1.79,4-4 S14.21,8,12,8L12,8z M13.22,3l0.55,2.2l0.13,0.51l0.5,0.18c0.61,0.23,1.19,0.56,1.72,0.98l0.4,0.32l0.5-0.14l2.17-0.62l1.22,2.11 l-1.63,1.59l-0.37,0.36l0.08,0.51c0.05,0.32,0.08,0.64,0.08,0.98s-0.03,0.66-0.08,0.98l-0.08,0.51l0.37,0.36l1.63,1.59l-1.22,2.11 l-2.17-0.62l-0.5-0.14l-0.4,0.32c-0.53,0.43-1.11,0.76-1.72,0.98l-0.5,0.18l-0.13,0.51L13.22,21h-2.44l-0.55-2.2l-0.13-0.51 l-0.5-0.18C9,17.88,8.42,17.55,7.88,17.12l-0.4-0.32l-0.5,0.14l-2.17,0.62L3.6,15.44l1.63-1.59l0.37-0.36l-0.08-0.51 C5.47,12.66,5.44,12.33,5.44,12s0.03-0.66,0.08-0.98l0.08-0.51l-0.37-0.36L3.6,8.56l1.22-2.11l2.17,0.62l0.5,0.14l0.4-0.32 C8.42,6.45,9,6.12,9.61,5.9l0.5-0.18l0.13-0.51L10.78,3H13.22 M14,2h-4L9.26,4.96c-0.73,0.27-1.4,0.66-2,1.14L4.34,5.27l-2,3.46 l2.19,2.13C4.47,11.23,4.44,11.61,4.44,12s0.03,0.77,0.09,1.14l-2.19,2.13l2,3.46l2.92-0.83c0.6,0.48,1.27,0.87,2,1.14L10,22h4 l0.74-2.96c0.73-0.27,1.4-0.66,2-1.14l2.92,0.83l2-3.46l-2.19-2.13c0.06-0.37,0.09-0.75,0.09-1.14s-0.03-0.77-0.09-1.14l2.19-2.13 l-2-3.46L16.74,6.1c-0.6-0.48-1.27-0.87-2-1.14L14,2L14,2z'></path>
+                           </g>
+                        </svg>
+                            <span class='menu-text'>Theme Settings</span>
+                            <svg class='icon-menu-plus' viewBox='0 0 20 20'>
+                           <rect fill='none' height='20' width='20' x='0'></rect>
+                           <g>
+                              <path d='M17 7v3h-5v5H9v-5H4V7h5V2h3v5h5z'></path>
+                           </g>
+                        </svg>
+                        </a>
+                        <ul>
+                            <li><label class='form-label' for='light'>Light <input class='form-control' id='light' name='theme' type='radio' value='light'/></label></li>
+                            <li><label class='form-label' for='dark-blue'>Dark Blue <input class='form-control' id='dark-blue' name='theme' type='radio' value='dark-blue'/></label></li>
+                            <li><label class='form-label' for='dark'>Dark <input class='form-control' id='dark' name='theme' type='radio' value='dark'/></label></li>
+                            <li class='toggleScreen'><label class='form-label' for='toggleScreen'>Min/Max Screen<input class='form-control' id='toggleScreen' name='screen' type='checkbox' value='wide'/></label></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class='row'>
+            <div class='col l-12 m-12 s-12'>
+                <ul class="tabs-list">
+                    <li class="tabs-item fade show" data-tab="tab-1"><a class="tabs-link totalRequested"><span class="loading"></span></a></li>
+                    <li class="tabs-item" data-tab="tab-2"><a class="tabs-link">Movies Search</a></li>
+                    <li class="tabs-item" data-tab="tab-3"><a class="tabs-link">Source SetFirebase</a></li>
+                    <li class="tabs-item" data-tab="tab-4"><a class="tabs-link totalReport">Reported</a></li>
+                </ul>
+                <div class="tabs-content">
+                    <div class="tabs-panel fade show" id="tab-1">
+                        <div class='row' id='requested'></div>
+                    </div>
+                    <div class="tabs-panel fade" id="tab-2">
+                        <div class='form-controls request'>
+                            <div class='form-group' id='group-discover'>
+                                <select class='form-control' id='discover'>
+                                 <option value='queryAll'>Search TMDb</option>
+                                 <option value='queryIMDb'>Search IMDb</option>
+                                 <option value='ID'>Search ID</option>
+                                 <option value='country'>Countries</option>
+                                 <option value='day'>Trending Day</option>
+                                 <option value='week'>Trending Week</option>
+                                 <option value='popular'>Popular</option>
+                                 <option value='top_rated'>Rated</option>
+                                 <option value='now_playing'>Now Playing</option>
+                                 <option value='upcoming'>Upcoming</option>
+                              </select>
+                            </div>
+                            <div class='form-group' id='group-IMDb'>
+                                <select class='form-control' id='IMDb'>
+                                 <option value='s'>Keywords to search</option>
+                                 <option value='t'>Title to search</option>
+                                 <option value='i'>ID to search</option>
+                              </select>
+                            </div>
+                            <div class='form-group' id='group-types'>
+                                <select class='form-control' id='types'>
+                                 <option value='movie'>Movies</option>
+                                 <option value='tv'>TV-Shows</option>
+                                 <option value='person'>Persons</option>
+                                 <option value='collection'>Collection</option>
+                              </select>
+                            </div>
+                            <div class='form-group' id='group-languages'>
+                                <select class='form-control' id='languages'></select>
+                            </div>
+                            <div class='form-group' id='group-country'>
+                                <select class='form-control' id='country'></select>
+                            </div>
+                            <div class='form-group' id='group-category'>
+                                <select class='form-control' id='category'></select>
+                            </div>
+                            <div class='form-group' id='group-years'>
+                                <select class='form-control' id='years'>
+                                 <option value=''>Years</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class='form-group' id='group-input'>
+                            <button class='form-control' id='submit' type='button'>
+                              <svg class='icon-search-btn' viewBox='0 0 24 24'>
+                                 <path d='M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z'>
+                                 </path>
+                              </svg>
+                           </button>
+                            <input class='form-control' id='input' placeholder='Enter Text...' type='text' value='' />
+                            <button class='form-control clear btn' onclick='jQuery("#request,#input,#control-pagination").html("");'>&#215;</button>
+                        </div>
+                        <div id='notification'></div>
+                        <div class='row' id='request'></div>
+                        <div id='control-pagination'></div>
+                    </div>
+                    <div class="tabs-panel fade" id="tab-3">
+                        <div class="row">
+                            <div class="col l-4 m-4 s-12">
+                                <div class='form-controls setFirebase'>
+                                    <div class="form-group">
+                                        <button class="form-control btn" type="button" id="delete">X</button>
+                                        <button class="form-control btn" type="button" id="creatLink">CreateLink...</button>
+                                        <button class="form-control btn" type="button" id="totals">Totals...</button>
+                                    </div>
+                                    <label class="form-label" for="">IMDb or TMDb</label>
+                                    <div class="form-group">
+                                        <button class="form-control btn" type="button" id="push">Post All</button>
+                                        <button class='form-control btn' type="button" onclick='jQuery("#imdB,#language,#sources").val("")'>Reset All</button>
+                                        <button class='form-control btn' type="button" onclick='jQuery("#language").val("")'>Reset Lang</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" id="imdB" type="text" style="margin-right: 5px;">
+                                        <input class="form-control" id="language" list="listStt" type="text">
+                                        <datalist id="listStt">
+                                <option></option>
+                                <option>Vietnamese</option>
+                                <option>Auto Vietsub</option>
+                                <option>English</option>
+                                <option>Chinese</option>
+                                <option>Japanese</option>
+                             </datalist>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-8 m-8 s-12">
+                                <div class='form-controls setFirebase'>
+                                    <div class="form-group">
+                                        <textarea type="text" class="form-control" id='result-display' rows="10" value="" type="text"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="form-label" for="">Source</label>
+                        <div class="form-controls setFirebase">
+                            <div class="form-group">
+                                <button class="form-control btn" type="button" id="select">Scan Data ID</button>
+                                <button class="form-control btn" type="button" id="update">UPDATE</button>
+                                <button class="form-control btn"><a class="btn"id="searchId" target="_blank">Watch</a></button>
+                                <button class='form-control btn' type="button" onclick='jQuery("#sources").val("")'>Reset</button>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="sources" rows="20" value="" type="text"></textarea>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tabs-panel fade" id="tab-4">
+                        <div class="form-group">
+                            <button class='form-control btn' type="button" onclick='report()'>Show Report</button>
+                        </div>
+                        <div class="row" id="reported" data-selection='false'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="toast"></div>
+    <script src="request.js"></script>
+    <script src="setFirebase.js"></script>
+    <script src="postData.js"></script>
+    <script src="report.js"></script>
+</body>
+
+</html>
