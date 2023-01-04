@@ -531,32 +531,30 @@ function removeItem(id) {
 
 function getData() {
     objTMDb.databaseRequestURL.on('value', (snapshot) => {
-        var item = snapshot.val(),
-            list = '',
-            none = 'display:none';
+        var items = snapshot.val(),list = '',none = 'display:none';
         if (document.location.pathname.includes('createMovie') || document.location.pathname.includes('index')) {
-            if (item != null) {
-                for (var i in item) {
-                    list += `<article class="col l-2 m-3 s-6" id="${item[i].id}">
+            if (items) {
+                for (var i in items) {
+                    list += `<article class="col l-2 m-3 s-6" id="${items[i].id}">
                     <div class="post">
-                        <a  id="${item[i].type}" ${item[i].type}="${item[i].id}" none="${none}" class="post-link">
+                        <a  id="${items[i].type}" ${items[i].type}="${items[i].id}" none="${none}" class="post-link">
                             <div class="post-image icon-info">
-                                <img src="${item[i].poster}" title="${item[i].title}" class="post-image-img">
+                                <img src="${items[i].poster}" title="${items[i].title}" class="post-image-img">
                             </div>
                             <div class="post-title">
-                                <h3 class="post-title-en">${item[i].title}</h3>
-                                <h4 class="post-title-vi">${item[i].time}</h4>
+                                <h3 class="post-title-en">${items[i].title}</h3>
+                                <h4 class="post-title-vi">${items[i].time}</h4>
                             </div>
                         </a>
                     </div>
                     <div class="post-status">
-                        <span class="post-status-text">${item[i].type}</span>
+                        <span class="post-status-text">${items[i].type}</span>
                     </div>
-                    <button class="post-wishlist" title="Remove" onclick="removeItem(${item[i].id})"><svg class='icon-request-times' viewBox='0 0 24 24'>
+                    <button class="post-wishlist" title="Remove" onclick="removeItem(${items[i].id})"><svg class='icon-request-times' viewBox='0 0 24 24'>
             <path d='M12.7,12l6.6,6.6l-0.7,0.7L12,12.7l-6.6,6.6l-0.7-0.7l6.6-6.6L4.6,5.4l0.7-0.7l6.6,6.6l6.6-6.6l0.7,0.7L12.7,12z'/>
         </svg></button>
                     <button class="post-overplay">
-                        <a none="${none}" id="${item[i].type}" ${item[i].type}="${item[i].id}" class="post-overplay-btn" title="Watch Info"></a>
+                        <a none="${none}" id="${items[i].type}" ${items[i].type}="${items[i].id}" class="post-overplay-btn" title="Watch Info"></a>
                     </button>
                 </article>`;
 
