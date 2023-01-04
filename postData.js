@@ -1,6 +1,6 @@
 $(document).on('click', '#movie', function() {
     var movieID = $(this).attr('movie'),
-        poster_path, backdrops_img, showHtml = '';
+        showHtml = '';
     $.getJSON(objTMDb.base_url + '/movie/' + movieID + '?api_key=' + objTMDb.api_key + '&language=' + objTMDb.language() + '&append_to_response=alternative_titles,credits,similar,videos,trailers,images&include_image_language=en,null', function(data) {
         var input_trailer = '';
         $.each(data.trailers.youtube, function(i, item) {

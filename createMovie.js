@@ -447,7 +447,7 @@ function checkMovie(json) {
             return -1 != n.indexOf(n) ? n.split("-")[0].replace(/(\[.*?\])/gi, "") : n
         }
         var m = entry.content.$t.match(/<img.*?.id="mvi-thumb-data".src="(.*?)"/)[1],
-            m = m.includes('/t/p/original') ? m.replace(/\/t\/p\/original/gi, "/t/p/w220_and_h330_face").replace(/https:\/\//gi, "//") : m,
+            m = m.includes('/t/p/original') ? m.replace(/\/t\/p\/original/gi, "/t/p/w220_and_h330_face") : m,
             s = entry.content.$t.match(/\[(.*?)\]/i),
             id = entry.content.$t.match(/\^?<div id=\"mvi-imdb-data\">(.*?)\<\/div>/i)[1];
         jQuery('.checkIMDb' + id).html(`<article class="col">

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manager Firebase</title>
-    <link href='http://viohd.blogspot.com/favicon.ico' rel='icon' type='image/x-icon'/>
+    <link href='http://viohd.blogspot.com/favicon.ico' rel='icon' type='image/x-icon' />
     <link rel="stylesheet" href="style.css">
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
@@ -17,7 +17,7 @@
             color: var(--color)
         }
         
-        button.post-overplay.isRequest {
+        button.post-overplay {
             display: none;
         }
     </style>
@@ -135,7 +135,6 @@
                                 <select class='form-control' id='types'>
                                  <option value='movie'>Movies</option>
                                  <option value='tv'>TV-Shows</option>
-                                 <option value='person'>Persons</option>
                                  <option value='collection'>Collection</option>
                               </select>
                             </div>
@@ -179,7 +178,7 @@
                                     </div>
                                     <label class="form-label" for="">IMDb or TMDb</label>
                                     <div class="form-group">
-                                        <button class="form-control btn" type="button" id="push">Post All</button>
+                                        <button class="form-control btn" type="button" id="push">Push All</button>
                                         <button class='form-control btn' type="button" onclick='jQuery("#imdB,#language,#sources").val("")'>Reset All</button>
                                         <button class='form-control btn' type="button" onclick='jQuery("#language").val("")'>Reset Lang</button>
                                     </div>

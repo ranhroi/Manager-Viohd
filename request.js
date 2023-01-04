@@ -1,7 +1,61 @@
 var objTMDb = {
-    objCountries: { 'US': 'United States', 'VN': 'Vietnam', 'CN': 'China', 'HK': 'Hong Kong', 'TW': 'Taiwan', 'KR': 'Korean', 'JP': 'Japan', 'TH': 'Thailand', 'IT': 'Italy' },
-    objLanguages: { 'en-US': 'English', 'vi-VN': 'Vietnamese', 'zh-CN': 'Chinese', 'zh-HK': 'Hong Kong', 'zh-TW': 'Taiwan', 'ko-KR': 'Korean', 'ja-JP': 'Japan', 'th-TH': 'Thailand', 'it-IT': 'Italian', 'de-DE': 'German', 'hi-IN': 'Hindi', 'id-ID': 'Indonesian', 'ms-MY': 'Malay', 'ru-RU': 'Russian' },
-    objCategories: { '0': 'Genres', 28: "Action", 12: "Adventure", 16: "Animation", 35: "Comedy", 80: "Crime", 99: "Documentary", 18: "Drama", 10751: "Family", 14: "Fantasy", 36: "History", 27: "Horror", 10402: "Music", 9648: "Mystery", 10749: "Romance", 878: "Science Fiction", 10770: "TV Movie", 53: "Thriller", 10752: "War", 37: "Western", 10759: "Action & Adventure", 10762: "Kids", 10763: "News", 10764: "Reality", 10765: "Sci-Fi & Fantasy", 10766: "Soap", 10767: "Talk", 10768: "War & Politics" },
+    objCountries: {
+        'US': 'United States',
+        'VN': 'Vietnam',
+        'CN': 'China',
+        'HK': 'Hong Kong',
+        'TW': 'Taiwan',
+        'KR': 'Korean',
+        'JP': 'Japan',
+        'TH': 'Thailand',
+        'IT': 'Italy'
+    },
+    objLanguages: {
+        'en-US': 'English',
+        'vi-VN': 'Vietnamese',
+        'zh-CN': 'Chinese',
+        'zh-HK': 'Hong Kong',
+        'zh-TW': 'Taiwan',
+        'ko-KR': 'Korean',
+        'ja-JP': 'Japan',
+        'th-TH': 'Thailand',
+        'it-IT': 'Italian',
+        'de-DE': 'German',
+        'hi-IN': 'Hindi',
+        'id-ID': 'Indonesian',
+        'ms-MY': 'Malay',
+        'ru-RU': 'Russian'
+    },
+    objCategories: {
+        '0': 'Genres',
+        28: "Action",
+        12: "Adventure",
+        16: "Animation",
+        35: "Comedy",
+        80: "Crime",
+        99: "Documentary",
+        18: "Drama",
+        10751: "Family",
+        14: "Fantasy",
+        36: "History",
+        27: "Horror",
+        10402: "Music",
+        9648: "Mystery",
+        10749: "Romance",
+        878: "Science Fiction",
+        10770: "TV Movie",
+        53: "Thriller",
+        10752: "War",
+        37: "Western",
+        10759: "Action & Adventure",
+        10762: "Kids",
+        10763: "News",
+        10764: "Reality",
+        10765: "Sci-Fi & Fantasy",
+        10766: "Soap",
+        10767: "Talk",
+        10768: "War & Politics"
+    },
     getID: function(a) {
         return jQuery("#" + a).val()
     },
@@ -40,7 +94,6 @@ var objTMDb = {
         return this.getID("CastCrew");
 
     },
-    databaseRequestURL: new Firebase('requestmov-c5622-default-rtdb.firebaseio.com/requests/'),
     apiKey: '89a9f57d',
     api_key: 'a0a7e40dc8162ed7e37aa2fc97db5654',
     base_url: 'https://api.themoviedb.org/3',
@@ -58,7 +111,10 @@ var objTMDb = {
     IMDb_url: 'https://www.imdb.com/title/',
     TMDb_movie_url: 'https://www.themoviedb.org/movie/',
     TMDb_tv_url: 'https://www.themoviedb.org/tv/',
-    Google_url: 'https://www.google.com/search?q='
+    Google_url: 'https://www.google.com/search?q=',
+    vioHD: 'http://viohd.blogspot.com',
+    databaseRequestURL: new Firebase('requestmov-c5622-default-rtdb.firebaseio.com/requests/')
+
 };
 jQuery(document).on('click', '#submit', function(validate) {
     validate = Validate();
@@ -531,7 +587,9 @@ function removeItem(id) {
 
 function getData() {
     objTMDb.databaseRequestURL.on('value', (snapshot) => {
-        var items = snapshot.val(),list = '',none = 'display:none';
+        var items = snapshot.val(),
+            list = '',
+            none = 'display:none';
         if (document.location.pathname.includes('createMovie') || document.location.pathname.includes('index')) {
             if (items) {
                 for (var i in items) {

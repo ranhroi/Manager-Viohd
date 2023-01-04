@@ -1161,10 +1161,12 @@ button.js--close {
     position: fixed;
     z-index: 1000;
     top: 5px;
-    right: 5px;
+    left: 0;
+    right: 0;
 }
 
 .toast {
+    margin: 0 auto;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
@@ -1176,6 +1178,7 @@ button.js--close {
 }
 
 .toast-msg {
+    text-align: center;
     font-weight: 300;
     line-height: 1.3;
     font-size: .9em;
