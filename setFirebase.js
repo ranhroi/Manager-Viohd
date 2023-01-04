@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
         sources = getID('sources').value;
         totals = getID('totals');
         creatLink = getID('creatLink');
-        searchId = getAll('.searchId');
+        searchId = getID('searchId');
         resultDisplay = getID("result-display");
     }
     jQuery(document).on('click', '#push', function() {
