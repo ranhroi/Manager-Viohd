@@ -10,7 +10,7 @@ var setFirebase = {
         function getElement() {
             imdB = $this.getID("imdB").value.trim();
             sources = $this.getID("sources").value.trim();
-            language = $this.getID("imdB").value.trim();
+            language = $this.getID("language").value.trim();
         }
 
         //get input value
