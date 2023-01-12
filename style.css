@@ -2980,6 +2980,9 @@ article.col {
 .form-controls.setFirebase .form-control:is(input, textarea) {
     background-color: white;
     color: black;
+    font-size: 1.2em;
+    font-family: monospace;
+    letter-spacing: 1px;
 }
 
 #reported>p,
